@@ -1,0 +1,590 @@
+
+index.html <html><head><base href="." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Fire ⚡ StarNethering</title>
+<style>
+:root {
+  --neon-blue: #00f3ff;
+  --neon-pink: #ff00ff;
+  --neon-green: #39ff14;
+}
+
+.dark-mode {
+  background: #fff !important;
+}
+
+.dark-mode * {
+  color: transparent !important;
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode p, .dark-mode li {
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue), var(--neon-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: rgbText 3s linear infinite;
+}
+
+@keyframes rgbText {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #0f0f1a;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  perspective: 1000px;
+}
+
+.header {
+  background: linear-gradient(45deg, #1a1a2e, #16213e);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 0 20px var(--neon-blue);
+  position: relative;
+  z-index: 1;
+  transform-style: preserve-3d;
+  animation: floatHeader 5s ease-in-out infinite;
+}
+
+@keyframes floatHeader {
+  0%, 100% { transform: translateZ(0px) rotateX(0deg); }
+  50% { transform: translateZ(50px) rotateX(5deg); }
+}
+
+.title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.main-btn {
+  display: block;
+  width: 80%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+  border: none;
+  border-radius: 15px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px var(--neon-pink);
+  position: relative;
+  overflow: hidden;
+}
+
+.main-btn:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 30px var(--neon-blue);
+  letter-spacing: 2px;
+}
+
+.main-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.ad-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(45deg, rgba(0,0,0,0.95), rgba(26,26,46,0.95));
+  padding: 3rem;
+  border-radius: 20px;
+  border: 3px solid var(--neon-blue);
+  box-shadow: 
+    0 0 30px var(--neon-blue),
+    inset 0 0 20px var(--neon-pink);
+  z-index: 1000;
+  display: none;
+  animation: popIn 0.5s ease-out;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+
+.ad-popup h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titlePulse 2s infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.ad-popup p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.ad-popup .close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: none;
+  border: 2px solid var(--neon-pink);
+  color: var(--neon-pink);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-popup .close-btn:hover {
+  background: var(--neon-pink);
+  color: black;
+  transform: rotate(90deg);
+}
+
+.summary {
+  background: rgba(0,0,0,0.5);
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 800px;
+  border: 1px solid var(--neon-blue);
+}
+
+.summary h2 {
+  color: var(--neon-green);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.summary li {
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.summary li:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateX(10px);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-card {
+  background: rgba(0,0,0,0.7);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid var(--neon-pink);
+  transition: all 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) rotateX(10deg);
+  box-shadow: 
+    0 15px 25px var(--neon-pink),
+    0 0 30px var(--neon-blue);
+}
+
+.lightning {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px var(--neon-blue),
+                 0 0 20px var(--neon-blue),
+                 0 0 30px var(--neon-blue);
+  }
+  to {
+    text-shadow: 0 0 20px var(--neon-pink),
+                 0 0 30px var(--neon-pink),
+                 0 0 40px var(--neon-pink);
+  }
+}
+
+.tutorial-box {
+  background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(26,26,46,0.8));
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 800px;
+  border: 2px solid var(--neon-green);
+  box-shadow: 0 0 20px var(--neon-green);
+  text-align: center;
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px var(--neon-green); }
+  50% { box-shadow: 0 0 40px var(--neon-green); }
+}
+
+.tutorial-box h3 {
+  color: var(--neon-green);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.tutorial-box p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.floating-action-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--neon-pink);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.floating-action-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px var(--neon-blue);
+}
+
+.floating-action-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: white;
+}
+
+.spooky-btn {
+  display: block;
+  width: 80%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-size: 2rem;
+  font-family: 'Creepster', cursive;
+  background: linear-gradient(45deg, #500000, #000000);
+  border: 2px solid #ff0000;
+  color: #ff0000;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 3px;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px #ff0000;
+  animation: creepyPulse 2s infinite;
+}
+
+@keyframes creepyPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.spooky-trigger-btn {
+  display: block;
+  width: 80%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-size: 2rem;
+  font-family: 'Creepster', cursive;
+  background: linear-gradient(45deg, #300000, #000000);
+  border: 2px solid #ff0000;
+  color: #ff0000;
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: 3px;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px #ff0000;
+  animation: creepyPulse 2s infinite;
+}
+
+.jumpscare {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.jumpscare h2 {
+  color: #ff0000;
+  font-size: 4rem;
+  font-family: 'Creepster', cursive;
+  text-shadow: 0 0 20px #ff0000;
+  animation: shake 0.5s infinite;
+}
+
+.jumpscare-btn {
+  font-size: 3rem;
+  font-family: 'Creepster', cursive;
+  color: #ff0000;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border: 3px solid #ff0000;
+  background: #000;
+  text-shadow: 0 0 10px #ff0000;
+  animation: pulse 1s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1 class="title">⚡ StarNethering ⚡</h1>
+  <button class="electricity-btn" onclick="addElectricity()">¡Electrifica la página!</button>
+</div>
+
+<div class="welcome-message">
+  <h2>¡Bienvenido al Mundo de StarNethering!</h2>
+  <p>Tu destino para contenido y recursos gaming de calidad</p>
+</div>
+
+<div class="tutorial-box">
+  <h3>🤔 ¿Cómo Acceder a la Web?</h3>
+  <p>¡Es súper fácil! Simplemente toca cualquiera de los enormes botones brillantes que dicen "Visita Nuestro Sitio Oficial" o los botones que aparezcan en las ventanas emergentes. ¡Te llevarán directamente a nuestro contenido exclusivo! 🚀</p>
+</div>
+
+<a href="https://sites.google.com/view/supreme-fire-starnethering/home" class="main-btn" target="_blank">Visita Nuestro Sitio Oficial</a>
+
+<a href="https://sites.google.com/view/supreme-fire-starnethering/home" class="spooky-btn" target="_blank">
+  VISITAAAAAAA... 👻
+</a>
+
+<button class="spooky-trigger-btn" onclick="triggerJumpscare()">
+  👻 ¡SORPRESA AQUÍ! 👻
+</button>
+
+<div class="jumpscare" id="jumpscare">
+  <h2>¡VISITA NUESTRA WEB O TE JALO LAS PATAAAAS!</h2>
+  <a href="https://sites.google.com/view/supreme-fire-starnethering/home" class="jumpscare-btn" target="_blank">
+    ¡VISITAAAAAAA!
+  </a>
+</div>
+
+<div class="content">
+  <div class="summary">
+    <h2>🌟 Nuestro Contenido Exclusivo</h2>
+    <ul>
+      <li>🤖 Chat Bots Personalizados y Automatización</li>
+      <li>🌐 Hosting Gratuito y Soluciones de Alojamiento</li>
+      <li>🎮 Recursos Gaming y Guías Especializadas</li>
+      <li>💬 Servidor Discord Activo y Amigable</li>
+      <li>📞 Soporte y Contacto Directo</li>
+    </ul>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>Chat Bots & Automatización</h3>
+      <p>Desarrollamos y compartimos bots personalizados para optimizar tu servidor</p>
+    </div>
+    <div class="feature-card">
+      <h3>Hosting Gratuito</h3>
+      <p>Encuentra las mejores opciones de hosting sin costo para tus proyectos</p>
+    </div>
+    <div class="feature-card">
+      <h3>Comunidad Discord</h3>
+      <p>Únete a nuestro servidor para soporte, gaming y más</p>
+    </div>
+  </div>
+</div>
+
+<div class="ad-popup" id="adPopup">
+  <button class="close-btn" onclick="closeAd()">×</button>
+  <h3>🎮 ¡Contenido Gaming Premium! 🎮</h3>
+  <p>¡Descubre nuestras guías exclusivas, trucos y recursos gaming! Mejora tu experiencia de juego con nuestro contenido especializado.</p>
+  <a href="https://sites.google.com/view/supreme-fire-starnethering/home" class="main-btn" target="_blank">Explorar Contenido</a>
+</div>
+
+<div class="ad-popup" id="adPopup2">
+  <button class="close-btn" onclick="closeAd2()">×</button>
+  <h3>🤖 ¡Bots y Automatización! 🤖</h3>
+  <p>¡Potencia tu servidor con nuestros bots personalizados! Accede a guías detalladas y recursos exclusivos.</p>
+  <a href="https://sites.google.com/view/supreme-fire-starnethering/home" class="main-btn" target="_blank">Descubrir Más</a>
+</div>
+
+<div class="ad-popup" id="adPopup3">
+  <button class="close-btn" onclick="closeAd3()">×</button>
+  <h3>🌐 ¡Hosting Gratuito! 🌐</h3>
+  <p>¡Encuentra las mejores soluciones de hosting sin costo! Guías paso a paso y recomendaciones expertas.</p>
+  <a href="https://sites.google.com/view/supreme-fire-starnethering/home" class="main-btn" target="_blank">Ver Opciones</a>
+</div>
+
+<button class="floating-action-btn" onclick="addElectricity()" title="Electrificar página">
+  <svg viewBox="0 0 24 24">
+    <path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12L11 3h1l-1 7h4.5c.58 0 .57.32.38.66-.19.34-.05.08-.07.12L11 21z"/>
+  </svg>
+</button>
+
+<script>
+let isDarkMode = false;
+
+function addElectricity() {
+  // Toggle dark mode
+  isDarkMode = !isDarkMode;
+  document.body.classList.toggle('dark-mode');
+  
+  // Original electricity effect
+  for (let i = 0; i < 10; i++) {
+    const lightning = document.createElement('div');
+    lightning.className = 'lightning';
+    lightning.style.position = 'fixed';
+    lightning.style.width = '3px';
+    lightning.style.height = Math.random() * 100 + 50 + 'px';
+    lightning.style.background = `linear-gradient(to bottom, 
+      var(--neon-blue), 
+      var(--neon-pink))`;
+    lightning.style.left = Math.random() * 100 + 'vw';
+    lightning.style.top = Math.random() * 100 + 'vh';
+    lightning.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(lightning);
+
+    lightning.style.transition = 'opacity 0.5s ease';
+    lightning.style.opacity = '1';
+    
+    setTimeout(() => {
+      lightning.style.opacity = '0';
+      setTimeout(() => {
+        document.body.removeChild(lightning);
+      }, 500);
+    }, 1000);
+  }
+}
+
+function showAd() {
+  const adPopup = document.getElementById('adPopup');
+  adPopup.style.display = 'block';
+}
+
+function closeAd() {
+  const adPopup = document.getElementById('adPopup');
+  adPopup.style.display = 'none';
+}
+
+function closeAd2() {
+  const adPopup2 = document.getElementById('adPopup2');
+  adPopup2.style.display = 'none';
+}
+
+function closeAd3() {
+  const adPopup3 = document.getElementById('adPopup3');
+  adPopup3.style.display = 'none';
+}
+
+// Mostrar anuncios en rotación
+let currentAd = 1;
+function rotateAds() {
+  document.getElementById('adPopup').style.display = 'none';
+  document.getElementById('adPopup2').style.display = 'none';
+  document.getElementById('adPopup3').style.display = 'none';
+  
+  document.getElementById('adPopup' + (currentAd === 0 ? '' : currentAd)).style.display = 'block';
+  currentAd = (currentAd + 1) % 3;
+}
+
+// Mostrar anuncios rotativos cada minuto
+setInterval(rotateAds, 60000);
+
+// Mostrar primer anuncio después de 5 segundos
+setTimeout(() => {
+  document.getElementById('adPopup').style.display = 'block';
+}, 5000);
+
+window.onload = function() {
+  // Show first ad after page loads
+  setTimeout(() => {
+    document.getElementById('adPopup').style.display = 'block';
+  }, 5000);
+}
+
+function triggerJumpscare() {
+  const jumpscare = document.getElementById('jumpscare');
+  jumpscare.style.display = 'flex';
+  
+  // Play scream sound
+  try {
+    const scream = new Audio('data:audio/mp3;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV');
+    scream.play().catch(e => console.log('Audio play failed:', e));
+  } catch(e) {
+    console.log('Audio creation failed:', e);
+  }
+  
+  // Hide jumpscare after 3 seconds
+  setTimeout(() => {
+    jumpscare.style.display = 'none';
+  }, 3000);
+}
+</script>
+
+</body>
+</html>
